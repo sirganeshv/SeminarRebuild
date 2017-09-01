@@ -68,7 +68,9 @@
     <script type="text/javascript" src="node_modules/jquery-ui/ui/widgets/datepicker.js"></script>
     <script type="text/javascript">
     $( function() {
-      $( "#booking-date" ).datepicker();
+      $( "#booking-date" ).datepicker({
+    	  dateFormat: "dd-M-y"
+      });
     } );
     </script>
 <!--
