@@ -1,4 +1,10 @@
-/build/
+build/
 .settings/
 .project
 .classpath
+WebContent/css/
+WebContent/sass/
+WebContent/fonts/
+WebContent/img/
+WebContent/node_modules/
+
