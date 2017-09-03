@@ -26,7 +26,7 @@ public class Display extends HttpServlet{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yy");
 		try {
 			Date bookingDate = formatter.parse(date); 
-			Map <Integer,Integer> bookings = dbhelper.display(bookingDate,hall);
+			Map <Integer,String> bookings = dbhelper.display(bookingDate,hall);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/booking-form.jsp");
 			request.setAttribute("data", bookings);
 			dispatcher.forward(request, response);

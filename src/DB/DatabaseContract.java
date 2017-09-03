@@ -16,4 +16,11 @@ public final class DatabaseContract {
 		public static final String column_hallNumber = "hall_number";
 		public static final String column_branch = "branch";
 	}
+	
+	public static final class StaffDetails {
+		public static final String table_name = "staff_details";
+		public static final String column_staffid ="staff_id";
+		public static final String column_staffName = "staff_name";
+		public static final String column_branch = "branch";
+	}
 }
