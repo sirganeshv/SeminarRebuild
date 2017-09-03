@@ -1,0 +1,23 @@
+/*
+ Values that have set of four values are in the order,
+
+      <top> <right> <bottom> <left>
+
+*/
+/* common values */
+/* form values */
+/* button values */
+.form-container {
+  width: 90%;
+  height: 100%;
+  padding: 3% 5%; }
+  .form-container form {
+    width: 100%;
+    height: 100%; }
+
+.form-container form .form-item {
+  padding: 2%; }
+  .form-container form .form-item .form-item-input {
+    padding: 2% 1% 1% 0; }
+
+/*# sourceMappingURL=first-form.css.map */
