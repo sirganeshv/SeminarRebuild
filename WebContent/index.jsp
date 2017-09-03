@@ -1,3 +1,4 @@
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -67,14 +68,15 @@
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="node_modules/jquery-ui/ui/widgets/datepicker.js"></script>
     <script type="text/javascript">
-    const currServerYear = 2017;
-    const currServerMonth = 9 - 1;   // Month: 0-11
-    const currServerDay = 01;
+    <%Calendar current = Calendar.getInstance();%>
+    const currServerYear = <%=current.get(Calendar.YEAR) %>;
+    const currServerMonth = <%=current.get(Calendar.MONTH)%>;   // Month: 0-11
+    const currServerDay = <%=current.get(Calendar.DATE)%>;
     const currServerDate = new Date(currServerYear, currServerMonth, currServerDay);
     // JS wraps the date for us
-    const maxDate = new Date(currServerYear, currServerMonth, currServerDay + 6);
+    const maxDate = new Date(currServerYear, currServerMonth, currServerDay - 6);
     $(function(){
-      $( "#booking-date" ).datepicker({ minDate: currServerDate, maxDate: maxDate ,dateFormat: "dd-M-y"});
+      $( "#booking-date" ).datepicker({ maxDate: currServerDate, minDate: maxDate ,dateFormat: "dd-M-yy"});
     });
     </script>
 <!--
