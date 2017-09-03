@@ -18,7 +18,7 @@
   </head>
   <body>
     <jsp:useBean id="booking" class="Helper.BookingsHelper" />
-    <% Map<Integer,Integer> bookings = (Map<Integer,Integer>)request.getAttribute("data");
+    <% Map<Integer,String> bookings = (Map<Integer,String>)request.getAttribute("data");
          BookingsHelper book = new BookingsHelper();
       	 book.setHallBookings(bookings);%>
     <!--[if lt IE 8]>
@@ -91,7 +91,7 @@
                     </td>
                     <td>
                       <div class="data">
-   						<%= book.getStaffId(1) %>	
+   						<%= book.getStatus(1) %>	
                       </div>
                     </td>
                   </tr>
@@ -122,7 +122,7 @@
                           staff_id = bookings.getOrDefault(2, -1); 
                           if(staff_id!=-1)
                        	--%>
-   						<%=book.getStaffId(2)%>	
+   						<%=book.getStatus(2)%>	
                       </div>
                     </td>
                   </tr>
@@ -153,7 +153,7 @@
                           staff_id = bookings.getOrDefault(3, -1); 
                           if(staff_id!=-1)
                        	--%>
-   						<%=book.getStaffId(3)%>
+   						<%=book.getStatus(3)%>
                       </div>
                     </td>
                   </tr>
@@ -180,7 +180,7 @@
                     </td>
                     <td>
                       <div class="data">
-   						<%=book.getStaffId(4)%>
+   						<%=book.getStatus(4)%>
                       </div>
                     </td>
                   </tr>
