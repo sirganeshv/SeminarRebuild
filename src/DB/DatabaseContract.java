@@ -7,7 +7,7 @@ public final class DatabaseContract {
 	
 	public static final class Bookings {
 		public static final String table_name = "bookings";
-		public static final String column_date = "dt";
+		public static final String column_date = "booking_date";
 		public static final String column_hallNumber = "hall_number";
 	}
 	
