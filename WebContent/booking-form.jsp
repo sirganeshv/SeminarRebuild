@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import = "java.util.*" %>
 <%@ page import = "Helper.BookingsHelper" %>
 <!DOCTYPE html>
@@ -80,175 +81,34 @@
                   </tr>
                 </thead>
                 <tbody>
-		  <tr class="template">
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="<VALUE"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
+                  <c:forEach begin="1" end="8" var="period">
+		    <tr class="template">
+                      <td>
+                        <div class="mdc-checkbox checkbox">
+                          <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="<VALUE"/>
+                          <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                              <path class="mdc-checkbox__checkmark__path"
+                                    fill="none"
+                                    stroke="white"
+                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        <!-- Hour -->
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        <!-- Availability statuus -->
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="1"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
+                      </td>
+                      <td>
+                        <div class="data">
+                          ${period}
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-						I
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-   						<%= book.getStatus(1) %>	
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="2"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
+                      </td>
+                      <td>
+                        <div class="data">
+                          <%=book.getStatus((int)pageContext.getAttribute("period"))%>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        II
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-  						<%--
-                          staff_id = bookings.getOrDefault(2, -1); 
-                          if(staff_id!=-1)
-                       	--%>
-   						<%=book.getStatus(2)%>	
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="3"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        III
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        <%--
-                          staff_id = bookings.getOrDefault(3, -1); 
-                          if(staff_id!=-1)
-                       	--%>
-   						<%=book.getStatus(3)%>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="4"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        IV
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-   						<%=book.getStatus(4)%>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="mdc-checkbox checkbox">
-                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="5"/>
-                        <div class="mdc-checkbox__background">
-                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                            <path class="mdc-checkbox__checkmark__path"
-                                  fill="none"
-                                  stroke="white"
-                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                          </svg>
-                          <div class="mdc-checkbox__mixedmark"></div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        V
-                      </div>
-                    </td>
-                    <td>
-                      <div class="data">
-                        Booked by Alice
-                      </div>
-                    </td>
-                  </tr>
-
+                      </td>
+                    </tr>
+                  </c:forEach>
                 </tbody>
               </table>
             </div> <!-- .form-item-input -->
