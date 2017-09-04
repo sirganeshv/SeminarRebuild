@@ -1,6 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import = "java.util.*" %>
-<%@ page import = "Helper.BookingsHelper" %>
+<%@ page import = "helper.BookingsHelper" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +18,7 @@
 
   </head>
   <body>
-    <jsp:useBean id="booking" class="Helper.BookingsHelper" />
+    <jsp:useBean id="booking" class="helper.BookingsHelper" />
     <% Map<Integer,String> bookings = (Map<Integer,String>)request.getAttribute("data");
          BookingsHelper book = new BookingsHelper();
       	 book.setHallBookings(bookings);%>
@@ -47,7 +47,7 @@
           </div> <!-- .msc-layout-grid -->
         </div>
 
-        <form action="LOREM IPSOM" method="post">
+        <form action="LOREM IPSOM" method="post" action = "book">
           <div class="form-item">
             <div class="form-item-label">Hall Status</div>
             <div class="form-item-input">
@@ -149,7 +149,7 @@
               </button>
             </a>
 
-              <button class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit">
+              <button class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit" >
                 Book
               </button>
             </div> <!-- .form-item-input -->

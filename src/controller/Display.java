@@ -1,4 +1,4 @@
-package Display;
+package controller;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DB.DBHelper;
-import DB.DatabaseHelper;
+import db.DBHelper;
+import db.DatabaseHelper;
 
 public class Display extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws 

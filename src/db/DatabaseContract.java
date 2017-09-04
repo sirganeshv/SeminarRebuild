@@ -1,4 +1,4 @@
-package DB;
+package db;
 
 public final class DatabaseContract {
 	private DatabaseContract() { }
