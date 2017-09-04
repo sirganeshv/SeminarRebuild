@@ -48,8 +48,8 @@
             <div class="form-item-input">
               <select class="mdc-select" name="hall" required>
                 <option value="" selected>Choose a hall</option>
-                <option value="cse">CSE</option>
-                <option value="mech">Mech</option>
+                <option value="CSE">CSE</option>
+                <option value="MECH">Mech</option>
               </select>
             </div>
           </div>
