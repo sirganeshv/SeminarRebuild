@@ -30,11 +30,22 @@
         <h1>Seminar hall booking</h1>
     </header>
     <div class="main-container">
-      <div class="known-data">
-
-      </div>
-      
       <div class="form-container">
+        <div class="known-data">
+          <div class="mdc-layout-grid form-item">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                <span class="title">Date:</span>
+                <span class="value"><%=request.getParameter("booking-date") %></span>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                <span class="title">Hall:</span>
+                <span class="value"><%=request.getParameter("hall") %></span>
+              </div>
+            </div>
+          </div> <!-- .msc-layout-grid -->
+        </div>
+
         <form action="LOREM IPSOM" method="post">
           <div class="form-item">
             <div class="form-item-label">Hall Status</div>
@@ -69,6 +80,32 @@
                   </tr>
                 </thead>
                 <tbody>
+		  <tr class="template">
+                    <td>
+                      <div class="mdc-checkbox checkbox">
+                        <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="<VALUE"/>
+                        <div class="mdc-checkbox__background">
+                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                            <path class="mdc-checkbox__checkmark__path"
+                                  fill="none"
+                                  stroke="white"
+                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                          </svg>
+                          <div class="mdc-checkbox__mixedmark"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="data">
+                        <!-- Hour -->
+                      </div>
+                    </td>
+                    <td>
+                      <div class="data">
+                        <!-- Availability statuus -->
+                      </div>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                       <div class="mdc-checkbox checkbox">
@@ -246,9 +283,11 @@
 
           <div class="form-item">
             <div class="form-item-input form-buttons">
+            <a href = "index.jsp" >
               <button class="mdc-button mdc-button--raised mdc-button--primary back-button" formnovalidate type="button">
                 Back
               </button>
+            </a>
 
               <button class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit">
                 Book
