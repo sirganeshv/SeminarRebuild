@@ -1,4 +1,4 @@
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.Calendar" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -70,7 +70,7 @@
     <script type="text/javascript">
     <%Calendar current = Calendar.getInstance();%>
     const currServerYear = <%=current.get(Calendar.YEAR) %>;
-    const currServerMonth = <%=current.get(Calendar.MONTH)%>;   // Month: 0-11
+    const currServerMonth = <%=current.get(Calendar.MONTH)%>;  
     const currServerDay = <%=current.get(Calendar.DATE)%>;
     const currServerDate = new Date(currServerYear, currServerMonth, currServerDay);
     // JS wraps the date for us
