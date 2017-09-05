@@ -8,7 +8,12 @@ public final class DatabaseContract {
 	public static final class Bookings {
 		public static final String table_name = "bookings";
 		public static final String column_date = "booking_date";
+		public static final String column_period = "period";
 		public static final String column_hallNumber = "hall_number";
+		public static final String column_staff_id = "staff_id";
+		public static final String column_year = "year";
+		public static final String column_branch = "branch";
+		public static final String column_section = "section";
 	}
 	
 	public static final class SeminarHall {
