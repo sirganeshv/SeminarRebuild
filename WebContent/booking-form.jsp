@@ -161,6 +161,7 @@
       </div> <!-- form-container -->
     </div> <!-- main-container -->
 
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript">
       // TODO : Initialize MDC componenets & jquery ui
       function getStaffId() {
@@ -168,7 +169,7 @@
       }
       function setStaffId() {
     	  const staffId = getStaffId();
-    	  document.getElementById('staffId').value = staffId;
+    	  $("#staffId").val(staffId);
       }
       //function s
     </script>
