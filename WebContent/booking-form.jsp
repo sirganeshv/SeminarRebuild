@@ -47,7 +47,7 @@
           </div> <!-- .msc-layout-grid -->
         </div>
 
-        <form action="LOREM IPSOM" method="post" action = "book">
+        <form action="book" method="post">
           <div class="form-item">
             <div class="form-item-label">Hall Status</div>
             <div class="form-item-input">
@@ -85,7 +85,7 @@
 		    <tr class="template">
                       <td>
                         <div class="mdc-checkbox checkbox">
-                          <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value="<VALUE"/>
+                          <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value='${period}'/>
                           <div class="mdc-checkbox__background">
                             <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                               <path class="mdc-checkbox__checkmark__path"
@@ -149,17 +149,28 @@
               </button>
             </a>
 
-              <button class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit" >
+              <button name = "book" id = "book" class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit" onclick="setStaffId()">
                 Book
               </button>
             </div> <!-- .form-item-input -->
           </div> <!-- .form-item -->
+          <input type="hidden" name="booking-date" value='<%=request.getParameter("booking-date")%>'/>
+          <input type="hidden" name="hall" value='<%=request.getParameter("hall")%>'/>
+          <input type="hidden" name="staffId" id="staffId"/>
         </form>
       </div> <!-- form-container -->
     </div> <!-- main-container -->
 
     <script type="text/javascript">
       // TODO : Initialize MDC componenets & jquery ui
+      function getStaffId() {
+    	  return prompt("Enter the staffId");
+      }
+      function setStaffId() {
+    	  const staffId = getStaffId();
+    	  document.getElementById('staffId').value = staffId;
+      }
+      //function s
     </script>
   </body>
 </html>
