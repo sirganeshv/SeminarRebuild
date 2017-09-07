@@ -19,7 +19,7 @@
   </head>
   <body>
     <jsp:useBean id="booking" class="helper.BookingsHelper" />
-    <% Map<Integer,String> bookings = (Map<Integer,String>)request.getAttribute("data");
+    <% Map<Integer,Integer> bookings = (Map<Integer,Integer>)request.getAttribute("data");
          BookingsHelper book = new BookingsHelper();
       	 book.setHallBookings(bookings);
       	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));%>

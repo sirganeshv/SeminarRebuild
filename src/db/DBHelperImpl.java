@@ -15,7 +15,7 @@ public class DBHelperImpl implements DBHelper {
 	
 	private Connection DBConnection;
 	private ResultSet result;
-	private Map<Integer,String> bookings;
+	private Map<Integer,Integer> bookings;
 	private PreparedStatement statement;
 	private String displayStatement = "Select " + 
 			DatabaseContract.Bookings.column_period + "," +
@@ -42,18 +42,18 @@ public class DBHelperImpl implements DBHelper {
 		}
 	}
 	
-	public Map<Integer,String> getBookings(Date date,String hall) {
+	public Map<Integer,Integer> getBookings(Date date,String hall) {
 		try {
 			statement = DBConnection.prepareStatement(displayStatement);
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yy-MM-dd");
 			String booking_date = dateFormatter.format(date);
-			bookings = new HashMap<Integer,String>();
+			bookings = new HashMap<Integer,Integer>();
 			System.out.println(booking_date);
 			statement.setString(1, booking_date);
 			statement.setString(2, hall);
 			result = statement.executeQuery();
 			while(result.next()) {
-				bookings.put(result.getInt(1),result.getString(2));
+				bookings.put((Integer)result.getInt(1),Integer.parseInt(result.getString(2)));
 			}
 			return bookings;
 		} catch (SQLException e) {

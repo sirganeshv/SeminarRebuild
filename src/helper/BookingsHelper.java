@@ -3,7 +3,7 @@ package helper;
 import java.util.Map;
 
 public class BookingsHelper {
-	private Map<Integer,String> hallBookings = null;
+	private Map<Integer,Integer> hallBookings = null;
 	private int currentStaffId;
 	
 	public int getCurrentStaffId() {
@@ -14,16 +14,16 @@ public class BookingsHelper {
 		this.currentStaffId = currentStaffId;
 	}
 
-	public Map<Integer, String> getHallBookings() {
+	public Map<Integer, Integer> getHallBookings() {
 		return hallBookings;
 	}
 
-	public void setHallBookings(Map<Integer, String> hallBookings) {
+	public void setHallBookings(Map<Integer, Integer> hallBookings) {
 		this.hallBookings = hallBookings;
 	}
 	
 	public String getStatus(int period) {
-		String staffName = hallBookings.get(period);
+		Integer staffName = hallBookings.get(period);
 	    if(staffName != null) return "Booked by "+staffName;
 	    else return "Available";
 	}
