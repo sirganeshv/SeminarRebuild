@@ -17,17 +17,20 @@ public class DBHelperImpl implements DBHelper {
 	private ResultSet result;
 	private Map<Integer,String> bookings;
 	private PreparedStatement statement;
-	private String displayStatement = "Select period,staff_name from " + 
-			DatabaseContract.Bookings.table_name + " b inner join " + 
-			DatabaseContract.StaffDetails.table_name + " s on s.staff_id = b.staff_id where " +
+	private String displayStatement = "Select " + 
+			DatabaseContract.Bookings.column_period + "," +
+			DatabaseContract.Bookings.column_staff_id +" from " + 
+			DatabaseContract.Bookings.table_name + " where " +
 		    DatabaseContract.Bookings.column_date + " = ? and " +
 		    DatabaseContract.Bookings.column_hallNumber + " in (select " +
 		    DatabaseContract.SeminarHall.column_hallNumber + " from " + 
 		    DatabaseContract.SeminarHall.table_name + " where " + 
 		    DatabaseContract.SeminarHall.column_branch + " = ? ) order by period";
-	private String bookStatement = "insert into " + DatabaseContract.Bookings.table_name +"(" + 
-		    DatabaseContract.Bookings.column_date + "," + DatabaseContract.Bookings.column_period + 
-		    "," + DatabaseContract.Bookings.column_hallNumber + "," + 
+	private String bookStatement = "insert into " + 
+		    DatabaseContract.Bookings.table_name +"(" + 
+		    DatabaseContract.Bookings.column_date + "," + 
+		    DatabaseContract.Bookings.column_period + "," + 
+		    DatabaseContract.Bookings.column_hallNumber + "," + 
 		    DatabaseContract.Bookings.column_staff_id + ") values(?,?,101,?)";
 	
 	public DBHelperImpl() {
@@ -39,7 +42,7 @@ public class DBHelperImpl implements DBHelper {
 		}
 	}
 	
-	public Map<Integer,String> display(Date date,String hall) {
+	public Map<Integer,String> getBookings(Date date,String hall) {
 		try {
 			statement = DBConnection.prepareStatement(displayStatement);
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yy-MM-dd");
