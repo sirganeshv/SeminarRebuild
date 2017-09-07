@@ -21,7 +21,8 @@
     <jsp:useBean id="booking" class="helper.BookingsHelper" />
     <% Map<Integer,String> bookings = (Map<Integer,String>)request.getAttribute("data");
          BookingsHelper book = new BookingsHelper();
-      	 book.setHallBookings(bookings);%>
+      	 book.setHallBookings(bookings);
+      	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));%>
     <!--[if lt IE 8]>
       <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
