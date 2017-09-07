@@ -6,6 +6,7 @@ import java.util.Map;
 
 public interface DBHelper {
 	public Map<Integer, Integer> getBookings(Date date,String hall);
-
-	public Boolean book(Date bookingDate, String hall,int staffId); 
+	public Boolean book(Date bookingDate, String hall,int staffId);
+	public String getStaffByName(int staffId);
+	
 }

@@ -32,6 +32,10 @@ public class DBHelperImpl implements DBHelper {
 		    DatabaseContract.Bookings.column_period + "," + 
 		    DatabaseContract.Bookings.column_hallNumber + "," + 
 		    DatabaseContract.Bookings.column_staff_id + ") values(?,?,101,?)";
+	private String getStaffStatement = "Select " +
+		    DatabaseContract.StaffDetails.column_staffName + " from " +
+		    DatabaseContract.StaffDetails.table_name + " where " +
+		    DatabaseContract.StaffDetails.column_staffid + " = ? ";
 	
 	public DBHelperImpl() {
 		try {
@@ -76,5 +80,18 @@ public class DBHelperImpl implements DBHelper {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public String getStaffByName(int staffId) {
+		try {
+			statement = DBConnection.prepareStatement(getStaffStatement);
+			statement.setInt(1, staffId);
+			result = statement.executeQuery();
+			result.next();
+			return result.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

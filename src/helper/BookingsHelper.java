@@ -2,10 +2,17 @@ package helper;
 
 import java.util.Map;
 
+import db.DBHelper;
+import db.DBHelperImpl;
+
 public class BookingsHelper {
 	private Map<Integer,Integer> hallBookings = null;
 	private int currentStaffId;
+	private DBHelper dbhelper;
 	
+	public BookingsHelper() {
+		dbhelper = new DBHelperImpl();
+	}
 	public int getCurrentStaffId() {
 		return currentStaffId;
 	}
@@ -23,9 +30,13 @@ public class BookingsHelper {
 	}
 	
 	public String getStatus(int period) {
-		Integer staffName = hallBookings.get(period);
-	    if(staffName != null) return "Booked by "+staffName;
+		Integer staffId = hallBookings.get(period);
+		if(staffId != null) {
+			if (staffId == getCurrentStaffId()) return "Booked by you";
+			else if(staffId != null) return "Booked by " + dbhelper.getStaffByName(staffId);
+		}
 	    else return "Available";
+		return null;
 	}
 
 }
