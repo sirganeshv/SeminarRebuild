@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.DBHelper;
-import db.DatabaseHelper;
+import db.DBHelperImpl;
 
-public class Display extends HttpServlet{
+public class GetBookingServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws 
 	ServletException,IOException {
-		DBHelper dbhelper = new DatabaseHelper();
+		DBHelper dbhelper = new DBHelperImpl();
 		String date = request.getParameter("booking-date");
 		String hall = request.getParameter("hall");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yy");

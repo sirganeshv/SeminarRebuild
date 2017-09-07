@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.DBHelper;
-import db.DatabaseHelper;
+import db.DBHelperImpl;
 
-public class Book extends HttpServlet {
+public class BookServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response) {
-		DBHelper dbhelper = new DatabaseHelper();
+		DBHelper dbhelper = new DBHelperImpl();
 		String date = request.getParameter("booking-date");
 		String hall = request.getParameter("hall");
 		int staffId = Integer.parseInt(request.getParameter("staffId"));
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yy");
+		System.out.println(staffId);
 		try {
 			Date bookingDate = formatter.parse(date); 
 			Boolean status = dbhelper.book(bookingDate,hall,staffId);

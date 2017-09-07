@@ -11,7 +11,7 @@ import java.util.Map;
 
 import db.DatabaseConnector;
 
-public class DatabaseHelper implements DBHelper {
+public class DBHelperImpl implements DBHelper {
 	
 	private Connection DBConnection;
 	private ResultSet result;
@@ -30,7 +30,7 @@ public class DatabaseHelper implements DBHelper {
 		    "," + DatabaseContract.Bookings.column_hallNumber + "," + 
 		    DatabaseContract.Bookings.column_staff_id + ") values(?,?,101,?)";
 	
-	public DatabaseHelper() {
+	public DBHelperImpl() {
 		try {
 			DBConnection = DatabaseConnector.getConnection();
 		}
