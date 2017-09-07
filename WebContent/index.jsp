@@ -53,7 +53,13 @@
               </select>
             </div>
           </div>
-
+          
+		  <div class="form-item">
+		    <div class="form-item-input">
+		      <input type="text" name="staffId" />
+		    </div>
+		  </div>
+		  
           <div class="form-item">
             <div class="form-item-input">
               <button class="mdc-button mdc-button--raised mdc-button--primary" type="submit">

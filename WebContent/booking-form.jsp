@@ -149,14 +149,14 @@
               </button>
             </a>
 
-              <button name = "book" id = "book" class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit" onclick="setStaffId()">
+              <button name = "book" id = "book" class="mdc-button mdc-button--raised mdc-button--primary submit-button" type="submit">
                 Book
               </button>
             </div> <!-- .form-item-input -->
           </div> <!-- .form-item -->
           <input type="hidden" name="booking-date" value='<%=request.getParameter("booking-date")%>'/>
           <input type="hidden" name="hall" value='<%=request.getParameter("hall")%>'/>
-          <input type="hidden" name="staffId" id="staffId"/>
+          <input type="hidden" name="staffId" id="staffId" value='<%=request.getParameter("staffId")%>'/>
         </form>
       </div> <!-- form-container -->
     </div> <!-- main-container -->
@@ -164,14 +164,6 @@
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript">
       // TODO : Initialize MDC componenets & jquery ui
-      function getStaffId() {
-    	  return prompt("Enter the staffId");
-      }
-      function setStaffId() {
-    	  const staffId = getStaffId();
-    	  $("#staffId").val(staffId);
-      }
-      //function s
     </script>
   </body>
 </html>
