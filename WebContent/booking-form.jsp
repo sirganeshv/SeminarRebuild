@@ -1,6 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import = "java.util.*" %>
-<%@ page import = "helper.BookingsHelper" %>
+<%@ page import = "helper.DisplayHelper" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,11 +18,13 @@
 
   </head>
   <body>
-    <jsp:useBean id="booking" class="helper.BookingsHelper" />
+    <jsp:useBean id="booking" class="helper.DisplayHelper" />
     <% Map<Integer,Integer> bookings = (Map<Integer,Integer>)request.getAttribute("data");
-         BookingsHelper book = new BookingsHelper();
+         DisplayHelper book = new DisplayHelper();
       	 book.setHallBookings(bookings);
-      	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));%>
+      	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));
+      	 Map<String,String> subjectsByClass = book.getSubjectsAndClasses();
+      	 request.setAttribute("subjectsByClass",subjectsByClass);%>
     <!--[if lt IE 8]>
       <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -114,31 +116,34 @@
               </table>
             </div> <!-- .form-item-input -->
           </div> <!-- .form-item -->
-
+          
           <div class="mdc-layout-grid form-item form-items">
             <div class="mdc-layout-grid__inner">
+            
+             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item">
+                <div class="form-item-label">Class</div>
+                <div class="form-item-input">
+                  <select class="mdc-select" name="class" required>
+                    <option value="" selected>Choose a class</option>
+           			<c:forEach items="${subjectsByClass}" var="subjectsByClass">
+                      <option value='${subjectsByClass.key}'>${subjectsByClass.key}</option>
+                    </c:forEach>
+                  </select>
+                </div>
+              </div>
+            
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item">
                 <div class="form-item-label">Subject</div>
                 <div class="form-item-input">
                   <select class="mdc-select" name="subject" required>
                     <option value="" selected>Choose a subject</option>
-                    <option value="ge6151">GE6151 Computer Programming</option>
-                    <option value="me6351">MA6351 Transforms and Partial Differential Equations</option>
-                    <option value="cs6401">CS6401 Operating Systems</option>
+                      <c:forEach items="${subjectsByClass}" var="subjectsByClass">
+                        <option value='${subjectsByClass.value}'>${subjectsByClass.value}</option>
+                      </c:forEach>
                   </select>
                 </div>
               </div>
-
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item">
-                <div class="form-item-label">Class</div>
-                <div class="form-item-input">
-                  <select class="mdc-select" name="class" required>
-                    <option value="" selected>Choose a class</option>
-                    <option value="4-a">1st year 'A'</option>
-                    <option value="4-b">1st year 'B'</option>
-                  </select>
-                </div>
-              </div>
+              
             </div>
           </div> <!-- .form-items -->
 
