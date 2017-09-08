@@ -28,4 +28,12 @@ public final class DatabaseContract {
 		public static final String column_staffName = "staff_name";
 		public static final String column_branch = "branch";
 	}
+	
+	public static final class SubjectHandled {
+		public static final String table_name = "subject_handled";
+		public static final String column_staffid = "staff_id";
+		public static final String column_class = "class";
+		public static final String column_subjecCode = "subject_code";
+		public static final String column_subjectTitle = "subject_title";
+	}
 }
