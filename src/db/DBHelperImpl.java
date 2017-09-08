@@ -16,6 +16,7 @@ public class DBHelperImpl implements DBHelper {
 	private Connection DBConnection;
 	private ResultSet result;
 	private Map<Integer,Integer> bookings;
+	private Map<String,String> subjectsByClass;
 	private PreparedStatement statement;
 	private String displayStatement = "Select " + 
 			DatabaseContract.Bookings.column_period + "," +
@@ -36,6 +37,11 @@ public class DBHelperImpl implements DBHelper {
 		    DatabaseContract.StaffDetails.column_staffName + " from " +
 		    DatabaseContract.StaffDetails.table_name + " where " +
 		    DatabaseContract.StaffDetails.column_staffid + " = ? ";
+	private String getSubjectAndClassStatement = "select " +
+		    DatabaseContract.SubjectHandled.column_class + "," +
+			DatabaseContract.SubjectHandled.column_subjectTitle + " from " +
+		    DatabaseContract.SubjectHandled.table_name + " where " +
+			DatabaseContract.SubjectHandled.column_staffid + " = ?"; 
 	
 	public DBHelperImpl() {
 		try {
@@ -89,6 +95,22 @@ public class DBHelperImpl implements DBHelper {
 			result = statement.executeQuery();
 			result.next();
 			return result.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Map<String,String> getSubjectsAndClasses(int staffId) {
+		try {
+			statement = DBConnection.prepareStatement(getSubjectAndClassStatement);
+			statement.setInt(1, staffId);
+			result = statement.executeQuery();
+			subjectsByClass = new HashMap<String,String>();
+			while(result.next()) {
+				subjectsByClass.put(result.getString(1),result.getString(2));
+			}
+			return subjectsByClass;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

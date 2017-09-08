@@ -5,12 +5,13 @@ import java.util.Map;
 import db.DBHelper;
 import db.DBHelperImpl;
 
-public class BookingsHelper {
+public class DisplayHelper {
 	private Map<Integer,Integer> hallBookings = null;
 	private int currentStaffId;
 	private DBHelper dbhelper;
+	private Map<String,String> subjectsByClass = null;
 	
-	public BookingsHelper() {
+	public DisplayHelper() {
 		dbhelper = new DBHelperImpl();
 	}
 	public int getCurrentStaffId() {
@@ -28,6 +29,14 @@ public class BookingsHelper {
 	public void setHallBookings(Map<Integer, Integer> hallBookings) {
 		this.hallBookings = hallBookings;
 	}
+
+	public Map<String, String> getSubjectsAndClasses() {
+		subjectsByClass = dbhelper.getSubjectsAndClasses(getCurrentStaffId());
+		/*for (Map.Entry entry : subjectClass.entrySet()) {
+		    System.out.println(entry.getKey() + ", " + entry.getValue());
+		}*/
+		return subjectsByClass;
+	}
 	
 	public String getStatus(int period) {
 		Integer staffId = hallBookings.get(period);
@@ -38,5 +47,4 @@ public class BookingsHelper {
 	    else return "Available";
 		return null;
 	}
-
 }
