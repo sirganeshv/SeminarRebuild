@@ -1,5 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ page import = "java.util.*" %>
+<%@ page import = "java.util.*,org.json.simple.JSONValue" %>
 <%@ page import = "helper.DisplayHelper" %>
 <!DOCTYPE html>
 <html>
@@ -19,12 +19,14 @@
   </head>
   <body>
     <jsp:useBean id="booking" class="helper.DisplayHelper" />
-    <% Map<Integer,Integer> bookings = (Map<Integer,Integer>)request.getAttribute("data");
+    <% Map<Integer,Integer> bookings = (Map<Integer,Integer>)request.getAttribute("bookingsData");
          DisplayHelper book = new DisplayHelper();
       	 book.setHallBookings(bookings);
       	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));
       	 Map<String,String> subjectsByClass = book.getSubjectsAndClasses();
-      	 request.setAttribute("subjectsByClass",subjectsByClass);%>
+      	 request.setAttribute("subjectsByClass",subjectsByClass);
+      	String subjectClassJson = JSONValue.toJSONString(subjectsByClass);   //Convert to JSON String
+      	 %>
     <!--[if lt IE 8]>
       <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -132,14 +134,10 @@
                 </div>
               </div>
             
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item subject">
                 <div class="form-item-label">Subject</div>
                 <div class="form-item-input">
                   <select class="mdc-select" name="subject" required>
-                    <option value="" selected>Choose a subject</option>
-                      <c:forEach items="${subjectsByClass}" var="subjectsByClass">
-                        <option value='${subjectsByClass.value}'>${subjectsByClass.value}</option>
-                      </c:forEach>
                   </select>
                 </div>
               </div>
@@ -169,6 +167,25 @@
 
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript">
+    $('select[name=class]').change(function() {
+      var selected_class = $(this).find(':selected').val();   
+      //Get the JSON String
+      var subjectClassJson = '<%=subjectClassJson%>';		
+      //Get back the Map as JS Array
+ 	  var subjectClass = JSON.parse(subjectClassJson);
+      //Add the Subjects for the selected class
+      $('select[name=subject]').append("<option value="+subjectClass[selected_class]+" selected>"+subjectClass[selected_class]+"</option>")
+ 	  display();     
+    });
+    //Display the hidden method
+    function display() {
+    	//Changed to default display property
+    	$('.subject').css("display","initial");
+    }
+    $()
+      $(document).ready(function() {
+      	  $('.subject').hide();
+      })
       // TODO : Initialize MDC componenets & jquery ui
     </script>
   </body>
