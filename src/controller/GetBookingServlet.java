@@ -28,7 +28,7 @@ public class GetBookingServlet extends HttpServlet{
 			Date bookingDate = formatter.parse(date); 
 			Map <Integer,Integer> bookings = dbhelper.getBookings(bookingDate,hall);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/booking-form.jsp");
-			request.setAttribute("data", bookings);
+			request.setAttribute("bookingsData", bookings);
 			dispatcher.forward(request, response);
 		}
 		catch (ParseException e) {
