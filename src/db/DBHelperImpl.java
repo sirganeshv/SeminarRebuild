@@ -12,27 +12,33 @@ import java.util.Map;
 import db.DatabaseConnector;
 
 public class DBHelperImpl implements DBHelper {
-	
+
 	private Connection DBConnection;
 	private ResultSet result;
 	private Map<Integer,Integer> bookings;
 	private Map<String,String> subjectsByClass;
 	private PreparedStatement statement;
-	private String displayStatement = "Select " + 
+	private String displayStatement = "Select " +
 			DatabaseContract.Bookings.column_period + "," +
-			DatabaseContract.Bookings.column_staff_id +" from " + 
+			DatabaseContract.Bookings.column_staff_id +" from " +
 			DatabaseContract.Bookings.table_name + " where " +
 		    DatabaseContract.Bookings.column_date + " = ? and " +
 		    DatabaseContract.Bookings.column_hallNumber + " in (select " +
-		    DatabaseContract.SeminarHall.column_hallNumber + " from " + 
-		    DatabaseContract.SeminarHall.table_name + " where " + 
+		    DatabaseContract.SeminarHall.column_hallNumber + " from " +
+		    DatabaseContract.SeminarHall.table_name + " where " +
 		    DatabaseContract.SeminarHall.column_branch + " = ? ) order by period";
-	private String bookStatement = "insert into " + 
-		    DatabaseContract.Bookings.table_name +"(" + 
-		    DatabaseContract.Bookings.column_date + "," + 
-		    DatabaseContract.Bookings.column_period + "," + 
-		    DatabaseContract.Bookings.column_hallNumber + "," + 
-		    DatabaseContract.Bookings.column_staff_id + ") values(?,?,101,?)";
+	private String bookStatement = "insert into " +
+		    DatabaseContract.Bookings.table_name +"(" +
+		    DatabaseContract.Bookings.column_date + "," +
+		    DatabaseContract.Bookings.column_period + "," +
+		    DatabaseContract.Bookings.column_hallNumber + "," +
+		    DatabaseContract.Bookings.column_staff_id + "," +
+		    DatabaseContract.Bookings.column_year + "," +
+		    DatabaseContract.Bookings.column_branch + "," +
+		    DatabaseContract.Bookings.column_section + ") values(?,?,(select "+
+		    DatabaseContract.SeminarHall.column_hallNumber + " from " +
+		    DatabaseContract.SeminarHall.table_name + " where " +
+		    DatabaseContract.SeminarHall.column_branch + " = ?),?,?,?,?)";
 	private String getStaffStatement = "Select " +
 		    DatabaseContract.StaffDetails.column_staffName + " from " +
 		    DatabaseContract.StaffDetails.table_name + " where " +
@@ -41,8 +47,8 @@ public class DBHelperImpl implements DBHelper {
 		    DatabaseContract.SubjectHandled.column_class + "," +
 			DatabaseContract.SubjectHandled.column_subjectTitle + " from " +
 		    DatabaseContract.SubjectHandled.table_name + " where " +
-			DatabaseContract.SubjectHandled.column_staffid + " = ?"; 
-	
+			DatabaseContract.SubjectHandled.column_staffid + " = ?";
+
 	public DBHelperImpl() {
 		try {
 			DBConnection = DatabaseConnector.getConnection();
@@ -51,7 +57,7 @@ public class DBHelperImpl implements DBHelper {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Map<Integer,Integer> getBookings(Date date,String hall) {
 		try {
 			statement = DBConnection.prepareStatement(displayStatement);
@@ -71,15 +77,24 @@ public class DBHelperImpl implements DBHelper {
 		}
 		return bookings;
 	}
-	
-	public Boolean book(Date date,String hall,int staffId) {
+
+	public Boolean book(Date date,int period,String hall,int staffId,String bookClass) {
 		try {
 			statement = DBConnection.prepareStatement(bookStatement);
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yy-MM-dd");
 			String booking_date = dateFormatter.format(date);
+			System.out.println("Helo");
+			String[] splitClass = bookClass.split(" ");
+			int year = Integer.parseInt(splitClass[0]);
+			String branch = splitClass[1];
+			String section = splitClass[2];
 			statement.setString(1, booking_date);
-			statement.setInt(2, 3);
-			statement.setInt(3, staffId);
+			statement.setInt(2, period);
+			statement.setString(3, hall);
+			statement.setInt(4, staffId);
+			statement.setInt(5, year);
+			statement.setString(6, branch);
+			statement.setString(7, section);
 			statement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -87,7 +102,7 @@ public class DBHelperImpl implements DBHelper {
 			return false;
 		}
 	}
-	
+
 	public String getStaffByName(int staffId) {
 		try {
 			statement = DBConnection.prepareStatement(getStaffStatement);
@@ -100,7 +115,7 @@ public class DBHelperImpl implements DBHelper {
 		}
 		return null;
 	}
-	
+
 	public Map<String,String> getSubjectsAndClasses(int staffId) {
 		try {
 			statement = DBConnection.prepareStatement(getSubjectAndClassStatement);

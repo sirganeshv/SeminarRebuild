@@ -25,8 +25,8 @@
       	 book.setCurrentStaffId(Integer.parseInt(request.getParameter("staffId")));
       	 Map<String,String> subjectsByClass = book.getSubjectsAndClasses();
       	 request.setAttribute("subjectsByClass",subjectsByClass);
-      	String subjectClassJson = JSONValue.toJSONString(subjectsByClass);   //Convert to JSON String
-      	 %>
+      	 String subjectClassJson = JSONValue.toJSONString(subjectsByClass);   //Convert to JSON String
+    %>
     <!--[if lt IE 8]>
       <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -87,7 +87,7 @@
                 </thead>
                 <tbody>
                   <c:forEach begin="1" end="8" var="period">
-		    <tr class="template">
+		                <tr class="template">
                       <td>
                         <div class="mdc-checkbox checkbox">
                           <input type="checkbox" class="mdc-checkbox__native-control" name="hour" value='${period}'/>
@@ -118,22 +118,22 @@
               </table>
             </div> <!-- .form-item-input -->
           </div> <!-- .form-item -->
-          
+
           <div class="mdc-layout-grid form-item form-items">
             <div class="mdc-layout-grid__inner">
-            
+
              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item">
                 <div class="form-item-label">Class</div>
                 <div class="form-item-input">
                   <select class="mdc-select" name="class" required>
                     <option value="" selected>Choose a class</option>
-           			<c:forEach items="${subjectsByClass}" var="subjectsByClass">
+           			    <c:forEach items="${subjectsByClass}" var="subjectsByClass">
                       <option value='${subjectsByClass.key}'>${subjectsByClass.key}</option>
                     </c:forEach>
                   </select>
                 </div>
               </div>
-            
+
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 form-item subject">
                 <div class="form-item-label">Subject</div>
                 <div class="form-item-input">
@@ -141,7 +141,7 @@
                   </select>
                 </div>
               </div>
-              
+
             </div>
           </div> <!-- .form-items -->
 
@@ -168,14 +168,14 @@
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript">
     $('select[name=class]').change(function() {
-      var selected_class = $(this).find(':selected').val();   
+      var selected_class = $(this).find(':selected').val();
       //Get the JSON String
-      var subjectClassJson = '<%=subjectClassJson%>';		
+      var subjectClassJson = '<%=subjectClassJson%>';
       //Get back the Map as JS Array
- 	  var subjectClass = JSON.parse(subjectClassJson);
+ 	    var subjectClass = JSON.parse(subjectClassJson);
       //Add the Subjects for the selected class
       $('select[name=subject]').append("<option value="+subjectClass[selected_class]+" selected>"+subjectClass[selected_class]+"</option>")
- 	  display();     
+ 	    display();
     });
     //Display the hidden method
     function display() {
