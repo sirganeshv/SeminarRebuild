@@ -14,6 +14,10 @@ node_fail:
 endif
 endif
 
+compile :
+	mkdir -p WEB-INF/classes
+	javac ../src/*/* -d WEB-INF/classes -classpath /opt/tomcat/lib/servlet-api.jar
+
 .PHONY: all watch
 
 all: node_modules
