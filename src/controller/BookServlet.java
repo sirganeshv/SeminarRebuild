@@ -16,12 +16,15 @@ public class BookServlet extends HttpServlet {
 		DBHelper dbhelper = new DBHelperImpl();
 		String date = request.getParameter("booking-date");
 		String hall = request.getParameter("hall");
+    int period = Integer.parseInt(request.getParameter("hour"));
+    String bookClass = request.getParameter("class");
 		int staffId = Integer.parseInt(request.getParameter("staffId"));
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yy");
+		System.out.println("The period and class "+ period + bookClass);
 		System.out.println(staffId);
 		try {
-			Date bookingDate = formatter.parse(date); 
-			Boolean status = dbhelper.book(bookingDate,hall,staffId);
+			Date bookingDate = formatter.parse(date);
+			Boolean status = dbhelper.book(bookingDate,period,hall,staffId,bookClass);
 			if(status) {
 				System.out.println("Successs");
 			}
@@ -32,7 +35,7 @@ public class BookServlet extends HttpServlet {
 		catch (ParseException e) {
 			e.printStackTrace();
 		}
-		//System.out.println("The date is "+ request.getParameter("booking-date") + request.getParameter("staffId"));
+		//System.out.println("The period and class "+ period + bookClass);
 	}
 
 }
