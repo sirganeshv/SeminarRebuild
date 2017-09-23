@@ -10,7 +10,7 @@ public class DisplayHelper {
 	private int currentStaffId;
 	private DBHelper dbhelper;
 	private Map<String,String> subjectsByClass = null;
-	
+
 	public DisplayHelper() {
 		dbhelper = new DBHelperImpl();
 	}
@@ -32,12 +32,9 @@ public class DisplayHelper {
 
 	public Map<String, String> getSubjectsAndClasses() {
 		subjectsByClass = dbhelper.getSubjectsAndClasses(getCurrentStaffId());
-		/*for (Map.Entry entry : subjectClass.entrySet()) {
-		    System.out.println(entry.getKey() + ", " + entry.getValue());
-		}*/
 		return subjectsByClass;
 	}
-	
+
 	public String getStatus(int period) {
 		Integer staffId = hallBookings.get(period);
 		if(staffId != null) {
